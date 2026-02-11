@@ -1,0 +1,30 @@
+name: CI Pipeline
+
+# 1. THE TRIGGER
+# When should this pipeline run?
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+# 2. THE JOBS
+# What work needs to be done?
+jobs:
+  build:
+    # We ask GitHub to give us a fresh Linux server (Ubuntu)
+    runs-on: ubuntu-latest
+
+    # These are the specific instructions we give the server
+    steps:
+    # Step A: Download your code onto the server
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Step B: Run a simple command
+    - name: Say hello
+      run: echo "Hello from CI/CD! 🚀"
+
+    # Step C: Prove we are in the right folder
+    - name: List files
+      run: ls -la
